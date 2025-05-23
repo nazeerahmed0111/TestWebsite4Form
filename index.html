@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Personal Details</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Status Form</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
   <main class="form-wrapper">
-    <h1>Enter Your Details</h1>
-    <form>
+    <h1>Status Form</h1>
+    <form method="POST">
       <input type="text" placeholder="First Name" name="firstName" required />
       <input type="text" placeholder="Last Name" name="lastName" required />
       <input type="email" placeholder="Email" name="email" required />
@@ -20,5 +20,17 @@
       <button type="submit">Submit</button>
     </form>
   </main>
+
+  <script>
+    // Check if URL contains ?submitted=true and show alert
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('submitted') === 'true') {
+        alert("Data inserted successfully");
+        // Remove query param so alert doesn't show again on reload
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    });
+  </script>
 </body>
 </html>
